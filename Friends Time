@@ -1,0 +1,52 @@
+FRIENDS TIME
+
+En un semestre de pregrado son 30 estudiantes:
+ 
+  1.	Valeria
+  2.	Julieta
+  3.	Ángel
+  4.	Andrés
+  5.	Nicolás
+  6.	Sofía
+  7.	Cristian
+  8.	Tomas
+  9.	Sergio
+  10.	Paula
+  11.	Juliana
+  12.	Martin
+  13.	Carlos
+  14.	Santiago
+  15.	Sebastián
+  16.	Alejandra
+  17.	Luisa
+  18.	Laura
+  19.	Salome
+  20.	Sara
+  21.	Miguel
+  22.	Natalia
+  23.	Ana
+  24.	David
+  25.	Katherine
+  26.	Luis
+  27.	Lorena
+  28.	Felipe
+  29.	Manuela
+  30.	Daniel
+ 
+Valeria quiere organizar una salida con todos sus compañeros, pero no todos se llevan bien entre ellos:
+
+  o	Valeria se lleva bien con todos.
+  o	Julieta le dijo te amo a Ángel por un desafío.
+  o	Laura estaba enamorada de Felipe, pero ella tiene novio.
+  o	Tomas le gusta Salome, pero ella es novia de Daniel.
+  o	Luisa le rompió el corazón a Felipe y no se hablan desde hace un año.
+  o	Julieta le rompió el corazón a Martin. 
+  o	A Cristian lo rechazaron Salome e Lorena. 
+  o	A Alejandra le cae mal Paula porque Miguel le está cayendo. 
+  o	Ángel odia a Santiago por romperle el corazón a Alejandra. 
+  o	Lorena y Felipe se pelean por la beca de excelencia.
+  o	El resto de los estudiantes se llevan bien entre ellos.
+
+¿Cuál es la menor cantidad de salidas que tiene que organizar Valeria para salir con todos sus compañeros
+sin que aquellos que se lleven mal se junten?
+

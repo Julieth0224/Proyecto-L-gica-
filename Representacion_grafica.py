@@ -5,8 +5,8 @@ from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 def visualizacion(y):
 
     fig, cuad = plt.subplots()
-    cuad.get_xaxis().set_visible(True)
-    cuad.get_yaxis().set_visible(True)
+    cuad.get_xaxis().set_visible(False)
+    cuad.get_yaxis().set_visible(False)
 
     archivo_imagen = plt.imread("circle.png", format="png")
     circulo = OffsetImage(archivo_imagen, zoom = 0.15)

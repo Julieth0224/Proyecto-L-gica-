@@ -126,30 +126,40 @@ def formaClausal(A):
                 i+=1
     return l
 
-def alv(S):
-    for i in formaClausal(S):
+def clausulaU(S):
+    for i in S:
         if(len(i)==1):
             return i[0]
-    return -1
+    return '-1'
+
+def neg(a):
+    let = map(chr, range(97,123))
+    if a in let:
+        return '-'+ a
+    else:
+        return a[1]
+
 
 def unitPropagate(S, I):
-    dic = {}
     x = []
-    l = alv(S)
-    fc = formaClausal(S)
-    while(x not in fc and l != -1):
-        for q in fc:
-            for d in q:
-                if d == l:
-                    dic.setdefault(d, 1)
-                    fc.remove(q)
-                elif d == ('-' + l):
-                    q.remove(d)
-                else:
-                    
+    while(x not in S):
+        l = clausulaU(S)
+        if l != '-1':
+            for q in S:
+                for d in q:
+                    if d == l:
+                        I.setdefault(d, 1)
+                        S.remove(q)
+                    elif d == neg(l):
+                        q.remove(d)
 
+        else:
+            break
+    return S, I
 
-
+i = {}
+s = [["p"],["-p","q"],["-q","r","s"],["u","-s","r"],["r","t"],["p","s","-t"],["-r","u"]]
+print(unitPropagate(s, i))
 
 
 
@@ -161,15 +171,15 @@ def unitPropagate(S, I):
 
 # Test Tseitin()
 # Descomente el siguiente código y corra el presente archivo
-formula = "(pYq)"
-print(Tseitin(formula, ['p','q'])) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
+#formula = "(pYq)"
+#print(Tseitin(formula, ['p','q'])) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
 
 # Test Clausula()
 # Descomente el siguiente código y corra el presente archivo
-c = "pO-qOr"
-print(Clausula(c)) # Debe obtener ['p', '-q', 'r']
+#c = "pO-qOr"
+#print(Clausula(c)) # Debe obtener ['p', '-q', 'r']
 
 # Test formaClausal()
 # Descomente el siguiente código y corra el presente archivo
-f = "pO-qOrY-sOt"
-print(formaClausal(f)) # Debe obtener [['p', '-q', 'r'], ['-s', 't']]
+#f = "pO-qOrY-sOt"
+#print(formaClausal(f)) # Debe obtener [['p', '-q', 'r'], ['-s', 't']]

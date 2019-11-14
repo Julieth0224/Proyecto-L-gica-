@@ -49,12 +49,13 @@ def enFNC(A):
 def Tseitin(A, letrasProposicionalesA):
     letrasProposicionalesB = [chr(x) for x in range(256, 300)]
     assert(not bool(set(letrasProposicionalesA) & set(letrasProposicionalesB))), u"¡Hay letras proposicionales en común!"
+    letras = letrasProposicionalesA + letrasProposicionalesB
     l = []
     pila = []
     i = -1
     s = A[0]
     while len(A)>0:
-        if s in letrasProposicionalesA and len(pila)>0 and pila[-1]=="-":
+        if s in letras and len(pila)>0 and pila[-1]=="-":
             i += 1
             atomo = letrasProposicionalesB[i]
             pila = pila[:-1]

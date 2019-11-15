@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 # Subrutinas para la transformacion de una
 # formula a su forma clausal
@@ -11,6 +10,132 @@
 #                   p=(qOr)
 #                   p=(q>r)
 # Output: B (cadena), equivalente en FNC
+LP = ['a', 'i', 'o', 'b', 'q', 'c', 'd', 'r', 'f', 'j', 'u', 'k', 'l', 'e', 'w',
+      'g', 'x', 'm', 'y', 'n', 'z', 'p', 's', 'h', '1', '2', '3', '4', 't', 'v']
+
+r1 = "(j>(-bY-m))"
+r2 = "(b>(-jY-h))"
+r3 = "(s>(dY-c))"
+r4 = "(d>(sY-d))"
+r5 = "(c>(-sY-e))"
+r6 = "(e>(-cY-f))"
+r7 = "(a>(-pY-h))"
+r8 = "(l>-f)"
+r9 = "(t>-d)"
+r10 = "(g>-f)"
+r11 = "(f>(-lY-gY-e))"
+r12 = "(m>-j)"
+r13 = "(p>-a)"
+r14 = "(h>-b)"
+
+class tree:
+    def __init__(self, l, izq, der):
+        self.label = l
+        self.left = izq
+        self.right = der
+
+a = tree("a", None, None)
+b = tree("b", None, None)
+c = tree("c", None, None)
+d = tree("d", None, None)
+f = tree("f", None, None)
+j = tree("j", None, None)
+l = tree("l", None, None)
+e = tree("e", None, None)
+g = tree("g", None, None)
+m = tree("m", None, None)
+p = tree("p", None, None)
+s = tree("s", None, None)
+h = tree("h", None, None)
+t = tree("t", None, None)
+
+Na = tree("-", None, a)
+Nb = tree("-", None, b)
+Nc = tree("-", None, c)
+Nd = tree("-", None, d)
+Nf = tree("-", None, f)
+Nj = tree("-", None, j)
+Nl = tree("-", None, l)
+Ne = tree("-", None, e)
+Ng = tree("-", None, g)
+Nm = tree("-", None, m)
+Np = tree("-", None, p)
+Ns = tree("-", None, s)
+Nh = tree("-", None, h)
+Nt = tree("-", None, t)
+
+A0 = tree("Y", Nb, Nm)
+A1 = tree("Y", Nj, Nh)
+A2 = tree("Y", d, Nc)
+A3 = tree("Y", s, Nt)
+A4 = tree("Y", Ns, Ne)
+A5 = tree("Y", Nc, Nf)
+A6 = tree("Y", Np, Nh)
+A7 = tree("Y", Ng, Ne)
+A8 = tree("Y", Nl, A7)
+
+R1 = tree(">", j, A0)
+R2 = tree(">", b, A1)
+R3 = tree(">", s, A2)
+R4 = tree(">", d, A3)
+R5 = tree(">", c, A4)
+R6 = tree(">", e, A5)
+R7 = tree(">", a, A6)
+R8 = tree(">", l, Nf)
+R9 = tree(">", t, Nd)
+R10 = tree(">", g, Nf)
+R11 = tree(">", f, A8)
+R12 = tree(">", m, Nj)
+R13 = tree(">", p, Na)
+R14 = tree(">", h, Nb)
+
+
+
+def polacaI(a):
+    p1 = ""
+    p1 += a.label
+    if a.right != None and a.left != None:
+        p1 += polacaI(a.left)
+        p1 += polacaI(a.right)
+    elif a.right != None and a.left == None:
+        p1 += polacaI(a.right)
+    return p1
+
+print(polacaI(R1))
+
+def string2tree(A, LetrasProposicionales):
+    conectivos = ["O", "Y", ">"]
+    pila = []
+    for c in A:
+        if c in LetrasProposicionales:
+            pila.append(tree(c, None, None))
+        elif c == "-":
+            formulaaux = tree(c, None, pila[-1])
+            del pila[-1]
+            pila.append(formulaaux)
+        elif c in conectivos:
+            formulaaux = tree(c, pila[-1], pila[-2])
+            del pila[-1]
+            del pila[-1]
+            pila.append(formulaaux)
+    return pila[-1]
+
+def inorder(a):
+    if a.right == None:
+        return a.label
+    elif a.label == "-":
+        return "-" + inorder(a.right)
+    else:
+        return "(" + inorder(a.left) + a.label + inorder(a.right) + ")"
+
+def regla():
+    x1 = ""
+    for q in range(14):
+        x1 += eval("r"+str(q+1))
+        if q < 13:
+            x1 += "Y"
+    return x1
+
 def enFNC(A):
     assert(len(A)==4 or len(A)==7), u"Fórmula incorrecta!"
     B = ''
@@ -60,8 +185,8 @@ def Tseitin(A, letrasProposicionalesA):
             atomo = letrasProposicionalesB[i]
             pila = pila[:-1]
             pila.append(atomo)
-            l.append(atomo + "=" + "-" + s)
-            A = A[0]
+            l.append(atomo + "=-" + s)
+            A = A[1:]
             if len(A)>0:
                 s = A[0]
         elif s == ")":
@@ -71,7 +196,7 @@ def Tseitin(A, letrasProposicionalesA):
             pila = pila[:len(pila)-4]
             i += 1
             atomo = letrasProposicionalesB[i]
-            l.append(atomo + "=" + "(" + v + o + w + ")")
+            l.append(atomo + "=(" + v + o + w + ")")
             s = atomo
         else:
             pila.append(s)
@@ -133,36 +258,61 @@ def clausulaU(S):
     return '-1'
 
 def neg(a):
-    let = map(chr, range(97,123))
-    if a in let:
+    if a in LP:
         return '-'+ a
     else:
         return a[1]
 
 
 def unitPropagate(S, I):
-    x = []
-    while(x not in S):
-        l = clausulaU(S)
-        if l != '-1':
-            for q in S:
-                for d in q:
-                    if d == l:
-                        I.setdefault(d, 1)
-                        S.remove(q)
-                    elif d == neg(l):
-                        q.remove(d)
+    bool = True
+    while bool:
+        for k in S:
+            if len(k) == 0:
+                #return "Insatisfacible", {}
+                break
 
+        cont = 0
+        for i in S:
+            if len(i) == 1:
+                cont += 1
+                lit = i[0]
+                if len(lit) == 1:
+                    pp = lit
+                    compl = "-" + lit
+                    valor = 1
+
+                elif(len(lit) == 2):
+                    pp = lit[1]
+                    compl = lit[1]
+                    valor = 0
+
+                for j in S:
+                    if j != i:
+                        if lit in j:
+                            S.remove(j)
+                I[pp] = valor
+                S.remove(i)
+                #print(i)
+
+
+        if cont == 0:
+            bool = False
         else:
-            break
+            for k in S:
+                if compl in k:
+                    k.remove(compl)
     return S, I
 
+print(regla())
+reg = regla()
 i = {}
 s = [["p"],["-p","q"],["-q","r","s"],["u","-s","r"],["r","t"],["p","s","-t"],["-r","u"]]
 print(unitPropagate(s, i))
-
-
-
+#print(enFNC(reg))
+x2 = Tseitin(reg, LP)
+print(Clausula(reg))
+print(formaClausal(x2))
 
 # Test enFNC()
 # Descomente el siguiente código y corra el presente archivo
@@ -171,8 +321,8 @@ print(unitPropagate(s, i))
 
 # Test Tseitin()
 # Descomente el siguiente código y corra el presente archivo
-#formula = "(pYq)"
-#print(Tseitin(formula, ['p','q'])) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
+formula = "(pYq)"
+print(Tseitin(formula, ['p', 'q'])) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
 
 # Test Clausula()
 # Descomente el siguiente código y corra el presente archivo

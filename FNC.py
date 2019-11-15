@@ -1,4 +1,3 @@
-
 # Subrutinas para la transformacion de una
 # formula a su forma clausal
 
@@ -10,6 +9,9 @@
 #                   p=(qOr)
 #                   p=(q>r)
 # Output: B (cadena), equivalente en FNC
+
+import copy
+
 LP = ['a', 'i', 'o', 'b', 'q', 'c', 'd', 'r', 'f', 'j', 'u', 'k', 'l', 'e', 'w',
       'g', 'x', 'm', 'y', 'n', 'z', 'p', 's', 'h', '1', '2', '3', '4', 't', 'v']
 
@@ -91,17 +93,34 @@ R14 = tree(">", h, Nb)
 
 
 
-def polacaI(a):
+def polaca(a):
     p1 = ""
     p1 += a.label
     if a.right != None and a.left != None:
-        p1 += polacaI(a.left)
-        p1 += polacaI(a.right)
+        p1 += polaca(a.left)
+        p1 += polaca(a.right)
     elif a.right != None and a.left == None:
-        p1 += polacaI(a.right)
+        p1 += polaca(a.right)
     return p1
 
-print(polacaI(R1))
+def inversa(a):
+    x3 = polaca(a)
+    return x3[::-1]
+
+def regla_pi():
+    x1 = ""
+    for q in range(14):
+        x1 += inversa(eval("R"+str(q+1)))
+    x1 += 13*"Y"
+    return x1
+
+def regla():
+    x1 = ""
+    for q in range(14):
+        x1 += eval("r"+str(q+1))
+        if q < 13:
+            x1 += "Y"
+    return x1
 
 def string2tree(A, LetrasProposicionales):
     conectivos = ["O", "Y", ">"]
@@ -128,13 +147,7 @@ def inorder(a):
     else:
         return "(" + inorder(a.left) + a.label + inorder(a.right) + ")"
 
-def regla():
-    x1 = ""
-    for q in range(14):
-        x1 += eval("r"+str(q+1))
-        if q < 13:
-            x1 += "Y"
-    return x1
+
 
 def enFNC(A):
     assert(len(A)==4 or len(A)==7), u"Fórmula incorrecta!"
@@ -172,47 +185,48 @@ def enFNC(A):
 # Input: A (cadena) en notacion inorder
 # Output: B (cadena), Tseitin
 def Tseitin(A, letrasProposicionalesA):
-    letrasProposicionalesB = [chr(x) for x in range(256, 300)]
+    letrasProposicionalesB = [chr(x) for x in range(256, 3000)]
+    atomos = letrasProposicionalesA + letrasProposicionalesB
     assert(not bool(set(letrasProposicionalesA) & set(letrasProposicionalesB))), u"¡Hay letras proposicionales en común!"
-    letras = letrasProposicionalesA + letrasProposicionalesB
     l = []
     pila = []
     i = -1
     s = A[0]
-    while len(A)>0:
-        if s in letras and len(pila)>0 and pila[-1]=="-":
+    while len(A) > 0:
+        if s in atomos and len(pila) > 0 and pila[-1] == '-' :
             i += 1
             atomo = letrasProposicionalesB[i]
             pila = pila[:-1]
             pila.append(atomo)
-            l.append(atomo + "=-" + s)
+            l.append(atomo + '=-' + s)
             A = A[1:]
-            if len(A)>0:
+            if len(A) > 0:
                 s = A[0]
-        elif s == ")":
+        elif s == ')':
             w = pila[-1]
             o = pila[-2]
             v = pila[-3]
             pila = pila[:len(pila)-4]
             i += 1
             atomo = letrasProposicionalesB[i]
-            l.append(atomo + "=(" + v + o + w + ")")
+            l.append(atomo + "=(" + v + o + w+")")
             s = atomo
         else:
             pila.append(s)
             A = A[1:]
-            if len(A)>0:
+            if len(A) > 0:
                 s = A[0]
-    B = ""
+    b = ''
     if i < 0:
         atomo = pila[-1]
     else:
         atomo = letrasProposicionalesB[i]
     for x in l:
         y = enFNC(x)
-        B += "Y" + y
-    B = atomo + B
-    return B
+        b += 'Y' + y
+    b = atomo + b
+
+    return b
 
 # Subrutina Clausula para obtener lista de literales
 # Input: C (cadena) una clausula
@@ -258,10 +272,11 @@ def clausulaU(S):
     return '-1'
 
 def neg(a):
-    if a in LP:
-        return '-'+ a
+    if len(a) == 1:
+        l = "-" + a
     else:
-        return a[1]
+        l = a[-1]
+    return l
 
 
 def unitPropagate(S, I):
@@ -304,15 +319,64 @@ def unitPropagate(S, I):
                     k.remove(compl)
     return S, I
 
-print(regla())
-reg = regla()
+def DPLL(s, i):
+    void = []
+    s, i = unitPropagate(s,i)
+    if void in s:
+        return "Insatisfacible", {}
+    elif len(s) == 0:
+        return "Satisfacible", i
+    l = ""
+    for y in s:
+        for x in y:
+            if x not in i.keys():
+                l = x
+    l_comp = neg(l)
+    if l == "":
+        return None
+    Sp = copy.deepcopy(s)
+    Sp = [n for n in Sp if l not in n]
+    for q in Sp:
+        if l_comp in q:
+            q.remove(neg(l))
+    Ip = copy.deepcopy(i)
+    if l[0] == "-":
+        Ip[l[1]] = 0
+    else:
+        Ip[l] = 1
+    S1, I1 = DPLL(Sp, Ip)
+    if S1 == "Satisfacible":
+        return S1, I1
+    else:
+        Spp = copy.deepcopy(s)
+        Spp = [q for q in Spp if neg(l) not in q]
+        for h in Spp:
+            if l in h:
+                h.remove(l)
+        Ipp = copy.deepcopy(i)
+        if l[0] == "-":
+            Ipp[l[1]] = 0
+        else:
+            Ipp[l] = 1
+        return DPLL(Spp, Ipp)
+
+
 i = {}
 s = [["p"],["-p","q"],["-q","r","s"],["u","-s","r"],["r","t"],["p","s","-t"],["-r","u"]]
 print(unitPropagate(s, i))
+F = regla_pi()
+reg = regla()
+T = string2tree(F, LP)
+Regla = inorder(T)
+TS = Tseitin(Regla, LP)
+Clau = formaClausal(TS)
+UU = DPLL(Clau,i)
+
+print(UU)
 #print(enFNC(reg))
-x2 = Tseitin(reg, LP)
-print(Clausula(reg))
-print(formaClausal(x2))
+#x2 = Tseitin(reg, LP)
+#print(Clausula(reg))
+#print(formaClausal(x2))
 
 # Test enFNC()
 # Descomente el siguiente código y corra el presente archivo
@@ -321,8 +385,8 @@ print(formaClausal(x2))
 
 # Test Tseitin()
 # Descomente el siguiente código y corra el presente archivo
-formula = "(pYq)"
-print(Tseitin(formula, ['p', 'q'])) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
+#formula = "(pYq)"
+#print(Tseitin(formula, ['p', 'q'])) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
 
 # Test Clausula()
 # Descomente el siguiente código y corra el presente archivo

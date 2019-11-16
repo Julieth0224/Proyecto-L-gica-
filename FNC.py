@@ -370,30 +370,11 @@ T = string2tree(F, LP)
 Regla = inorder(T)
 TS = Tseitin(Regla, LP)
 Clau = formaClausal(TS)
-UU = DPLL(Clau,i)
+s, UU = DPLL(Clau,i)
+UYES = {}
+for l in UU.keys():
+    if l in LP:
+        UYES[l] = UU[l]
 
-print(UU)
-#print(enFNC(reg))
-#x2 = Tseitin(reg, LP)
-#print(Clausula(reg))
-#print(formaClausal(x2))
-
-# Test enFNC()
-# Descomente el siguiente código y corra el presente archivo
-# formula = "p=(qYr)"
-# print(enFNC(formula)) # Debe obtener qO-pYrO-pY-qO-rOp
-
-# Test Tseitin()
-# Descomente el siguiente código y corra el presente archivo
-#formula = "(pYq)"
-#print(Tseitin(formula, ['p', 'q'])) # Debe obtener AYpO-AYqO-AY-pO-qOA (la A tiene una raya encima)
-
-# Test Clausula()
-# Descomente el siguiente código y corra el presente archivo
-#c = "pO-qOr"
-#print(Clausula(c)) # Debe obtener ['p', '-q', 'r']
-
-# Test formaClausal()
-# Descomente el siguiente código y corra el presente archivo
-#f = "pO-qOrY-sOt"
-#print(formaClausal(f)) # Debe obtener [['p', '-q', 'r'], ['-s', 't']]
+#print(UU)
+print(UYES)

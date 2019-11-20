@@ -11,6 +11,7 @@
 # Output: B (cadena), equivalente en FNC
 
 import copy
+import random
 
 LP = ['a', 'i', 'o', 'b', 'q', 'c', 'd', 'r', 'f', 'j', 'u', 'k', 'l', 'e', 'w',
       'g', 'x', 'm', 'y', 'n', 'z', 'p', 's', 'h', '1', '2', '3', '4', 't', 'v']
@@ -21,14 +22,14 @@ r3 = "(s>(dY-c))"
 r4 = "(d>(sY-t))"
 r5 = "(c>-s)"
 r6 = "(e>-f)"
-r7 = "(a>(-pY-h))"
+r7 = "(a>-p)"
 r8 = "(l>-f)"
 r9 = "(t>-d)"
 r10 = "(g>-f)"
 r11 = "(f>(-lY-gY-e))"
 r12 = "(m>-j)"
 r13 = "(p>-a)"
-r14 = "(h>(-bY-a)"
+r14 = "(h>-b)"
 
 class tree:
     def __init__(self, l, izq, der):
@@ -70,10 +71,9 @@ A0 = tree("Y", Nb, Nm)
 A1 = tree("Y", Nj, Nh)
 A2 = tree("Y", d, Nc)
 A3 = tree("Y", s, Nt)
-A6 = tree("Y", Np, Nh)
-A7 = tree("Y", Ng, Ne)
-A8 = tree("Y", Nl, A7)
-A9 = tree("Y", Nb, Na)
+A4 = tree("Y", Ng, Ne)
+A5 = tree("Y", Nl, A4)
+
 
 R1 = tree("Y", j, A0)
 R2 = tree("Y", b, A1)
@@ -81,14 +81,14 @@ R3 = tree("Y", s, A2)
 R4 = tree("Y", d, A3)
 R5 = tree("Y", c, Ns)
 R6 = tree("Y", e, Nf)
-R7 = tree("Y", a, A6)
+R7 = tree("Y", a, Np)
 R8 = tree("Y", l, Nf)
 R9 = tree("Y", t, Nd)
 R10 = tree("Y", g, Nf)
-R11 = tree("Y", f, A8)
+R11 = tree("Y", f, A5)
 R12 = tree("Y", m, Nj)
 R13 = tree("Y", p, Na)
-R14 = tree("Y", h, A9)
+R14 = tree("Y", h, Nb)
 
 def polaca(a):
     p1 = ""
@@ -370,5 +370,13 @@ interpretaciones = {}
 for l in U.keys():
     if l in LP:
         interpretaciones[l] = U[l]
+
+for q in LP:
+    if q not in interpretaciones:
+        sel = random.choice(q)
+        interpretaciones[sel] = random.randrange(2)
+
+file = open("interpretaciones.txt", "w")
+file.close()
 
 print(interpretaciones)

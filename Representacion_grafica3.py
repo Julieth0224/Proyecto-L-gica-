@@ -133,89 +133,72 @@ def visualizacion(x,y):
     imageny.image.axes = cuad
 
     direcciones = {}
-    direcciones['v'] = [0.5, 0.9]  # Valeria
+    direcciones[31] = [0.25, 0.5] # Circulo
+    direcciones[32] = [0.75, 0.5] # Circulo
 
+    direcciones['v'] = [0.5, 0.9]  # Valeria
 
     direcciones['b'] = [0.18, 0.765]  # Angel
     direcciones['c'] = [0.3, 0.765]  # Cristian
-
     direcciones['l'] = [0.12, 0.695]  # Laura
     direcciones['g'] = [0.23, 0.695]  # Luisa
     direcciones['x'] = [0.35, 0.695]  # Manuela
-
     direcciones['m'] = [0.09, 0.625]  # Martin
     direcciones['t'] = [0.2, 0.625]  # Tomas
     direcciones['1'] = [0.29, 0.625]  # Sara
     direcciones['2'] = [0.4, 0.625]  # Sebastian
-
     direcciones['3'] = [0.07, 0.555]  # Sergio
     direcciones['d'] = [0.16, 0.555]  # Daniel
     direcciones['f'] = [0.25, 0.555]  # Felipe
     direcciones['j'] = [0.35, 0.555]  # Juliana
     direcciones['w'] = [0.448, 0.555]  # Luis
-
     direcciones['p'] = [0.07, 0.485]  # Paula
     direcciones['h'] = [0.19, 0.485]  # Santiago
     direcciones['s'] = [0.31, 0.485]  # Salome
     direcciones['n'] = [0.42, 0.485]  # Natalia
-
     direcciones['z'] = [0.09, 0.415]  # Nicolas
     direcciones['4'] = [0.2, 0.415]  # Sofia
     direcciones['e'] = [0.31, 0.415]  # Lorena
     direcciones['y'] = [0.42, 0.415]  # Miguel
-
     direcciones['o'] = [0.12, 0.345]  # Andres
     direcciones['q'] = [0.22, 0.345]  # Carlos
     direcciones['r'] = [0.32, 0.345]  # David
     direcciones['i'] = [0.4, 0.345]  # Ana
-
     direcciones['u'] = [0.18, 0.275] # Julieta
     direcciones['k'] = [0.3, 0.275]  #  Katherine
-
     direcciones['a'] = [0.25, 0.22] # Alejandra
 
-
-    direcciones[31] = [0.25, 0.5] # Circulo
-    direcciones[32] = [0.75, 0.5] # Circulo
 
  #  SEGUNDO CIRCULO
 
     direcciones['b*'] = [0.68, 0.765] # Angel
     direcciones['c*'] = [0.8, 0.765] # Cristian
-
     direcciones['l*'] = [0.62, 0.695] # Laura
     direcciones['g*'] = [0.73, 0.695] # Luisa
     direcciones['x*'] = [0.85, 0.695] # Manuela
-
     direcciones['m*'] = [0.59, 0.625] # Martin
     direcciones['t*'] = [0.7, 0.625] # Tomas
     direcciones['1*'] = [0.79, 0.625] # Sara
     direcciones['2*'] = [0.9, 0.625] # Sebastian
-
     direcciones['3*'] = [0.57, 0.555] # Sergio
     direcciones['d*'] = [0.66, 0.555] # Daniel
     direcciones['f*'] = [0.75, 0.555] # Felipe
     direcciones['j*'] = [0.85, 0.555] # Juliana
     direcciones['w*'] = [0.948, 0.555] # Luis
-
     direcciones['p*'] = [0.57, 0.485] # Paula
     direcciones['h*'] = [0.69, 0.485] # Santiago
     direcciones['s*'] = [0.81, 0.485] # Salome
     direcciones['n*'] = [0.92, 0.485] # Natalia
-
     direcciones['z*'] = [0.59, 0.415] # Nicolas
     direcciones['4*'] = [0.7, 0.415] # Sofia
     direcciones['e*'] = [0.81, 0.415] # Lorena
     direcciones['y*'] = [0.92, 0.415] # Miguel
-
     direcciones['o*'] = [0.62, 0.345] # Andres
     direcciones['q*'] = [0.72, 0.345] # Carlos
     direcciones['r*'] = [0.82, 0.345] # David
     direcciones['i*'] = [0.9, 0.345] # Ana
-
     direcciones['u*'] = [0.68, 0.275] # Julieta
     direcciones['k*'] = [0.8, 0.275] # Katherine
-
     direcciones['a*'] = [0.75, 0.22] # Alejandra
 
     for q in range(31,33): # Inserta circulos
@@ -239,7 +222,7 @@ def visualizacion(x,y):
     fig.savefig("result_" + str(y) + ".png" )
 
 
-prueba = {'j':1, 'b':0, 'm':0, 'h':1, 's':1, 'd':1, 'c':0, 't':0, 'e':1, 'f':0,
-          'a':1, 'p':0, 'l':1, 'g':1}
-
-visualizacion(prueba,"ok")
+# prueba = {'j':1, 'b':0, 'm':0, 'h':1, 's':1, 'd':1, 'c':0, 't':0, 'e':1, 'f':0,
+#           'a':1, 'p':0, 'l':1, 'g':1}
+#
+# visualizacion(prueba,"ok")

@@ -134,89 +134,89 @@ def visualizacion(x,y):
 
 
     direcciones = {}
-    direcciones[1] = [0.5, 0.9]
+    direcciones[1] = [0.5, 0.9]#valeria
 
 
-    direcciones[3] = [0.18, 0.765]
-    direcciones[4] = [0.3, 0.765]
+    direcciones[3] = [0.18, 0.765]#angel
+    direcciones[4] = [0.3, 0.765]#cristian
 
-    direcciones[5] = [0.12, 0.695]
-    direcciones[6] = [0.23, 0.695]
-    direcciones[29] = [0.35, 0.695]
+    direcciones[5] = [0.12, 0.695]#laura
+    direcciones[6] = [0.23, 0.695]#luisa
+    direcciones[29] = [0.35, 0.695]#manuela
 
-    direcciones[7] = [0.09, 0.625]
-    direcciones[8] = [0.2, 0.625]
-    direcciones[9] = [0.29, 0.625]
-    direcciones[10] = [0.4, 0.625]
+    direcciones[7] = [0.09, 0.625]#martin
+    direcciones[8] = [0.2, 0.625]#tomas
+    direcciones[9] = [0.29, 0.625]#Sara
+    direcciones[10] = [0.4, 0.625]#sebastian
 
-    direcciones[11] = [0.07, 0.555]
-    direcciones[12] = [0.16, 0.555]
-    direcciones[13] = [0.25, 0.555]
-    direcciones[14] = [0.35, 0.555]
-    direcciones[28] = [0.448, 0.555]
+    direcciones[11] = [0.07, 0.555]#sergio
+    direcciones[12] = [0.16, 0.555]#daniel
+    direcciones[13] = [0.25, 0.555]#felipe
+    direcciones[14] = [0.35, 0.555]#juliana
+    direcciones[28] = [0.448, 0.555]#luis
 
-    direcciones[15] = [0.07, 0.485]
-    direcciones[16] = [0.19, 0.485]
-    direcciones[17] = [0.31, 0.485]
-    direcciones[18] = [0.42, 0.485]
+    direcciones[15] = [0.07, 0.485]#paula
+    direcciones[16] = [0.19, 0.485]#santiago
+    direcciones[17] = [0.31, 0.485]#salome
+    direcciones[18] = [0.42, 0.485]#natalia
 
-    direcciones[19] = [0.09, 0.415]
-    direcciones[20] = [0.2, 0.415]
-    direcciones[21] = [0.31, 0.415]
-    direcciones[30] = [0.42, 0.415]
+    direcciones[19] = [0.09, 0.415]#nicolas
+    direcciones[20] = [0.2, 0.415]#sofia
+    direcciones[21] = [0.31, 0.415]#lorena
+    direcciones[30] = [0.42, 0.415]#miguel
 
-    direcciones[23] = [0.12, 0.345]
-    direcciones[24] = [0.22, 0.345]
-    direcciones[25] = [0.32, 0.345]
-    direcciones[22] = [0.4, 0.345]
+    direcciones[23] = [0.12, 0.345]#andres
+    direcciones[24] = [0.22, 0.345]#carlos
+    direcciones[25] = [0.32, 0.345]#david
+    direcciones[22] = [0.4, 0.345]#ana
 
-    direcciones[26] = [0.18, 0.275]
-    direcciones[27] = [0.3, 0.275]
+    direcciones[26] = [0.18, 0.275]#julieta
+    direcciones[27] = [0.3, 0.275]#katherine
 
-    direcciones[2] = [0.25, 0.22]
+    direcciones[2] = [0.25, 0.22]#alejandra
 
 
-    direcciones[31] = [0.25, 0.5]
-    direcciones[32] = [0.75, 0.5]
+    direcciones[31] = [0.25, 0.5]#circulo
+    direcciones[32] = [0.75, 0.5]#circulo
 
 # SEGUNDO CIRCULO
-    direcciones[34] = [0.68, 0.765]
-    direcciones[35] = [0.8, 0.765]
+    direcciones[34] = [0.68, 0.765]#angel
+    direcciones[35] = [0.8, 0.765]#cristian
 
-    direcciones[36] = [0.62, 0.695]
-    direcciones[37] = [0.73, 0.695]
-    direcciones[60] = [0.85, 0.695]
+    direcciones[36] = [0.62, 0.695]#laura
+    direcciones[37] = [0.73, 0.695]#luisa
+    direcciones[60] = [0.85, 0.695]#manuela
 
-    direcciones[38] = [0.59, 0.625]
-    direcciones[39] = [0.7, 0.625]
-    direcciones[40] = [0.79, 0.625]
-    direcciones[41] = [0.9, 0.625]
+    direcciones[38] = [0.59, 0.625]#martin
+    direcciones[39] = [0.7, 0.625]#tomas
+    direcciones[40] = [0.79, 0.625]#Sara
+    direcciones[41] = [0.9, 0.625]#sebastian
 
-    direcciones[42] = [0.57, 0.555]
-    direcciones[43] = [0.66, 0.555]
-    direcciones[44] = [0.75, 0.555]
-    direcciones[45] = [0.85, 0.555]
-    direcciones[59] = [0.948, 0.555]
+    direcciones[42] = [0.57, 0.555]#sergio
+    direcciones[43] = [0.66, 0.555]#daniel
+    direcciones[44] = [0.75, 0.555]#felipe
+    direcciones[45] = [0.85, 0.555]#juliana
+    direcciones[59] = [0.948, 0.555]#luis
 
-    direcciones[46] = [0.57, 0.485]
-    direcciones[47] = [0.69, 0.485]
-    direcciones[48] = [0.81, 0.485]
-    direcciones[49] = [0.92, 0.485]
+    direcciones[46] = [0.57, 0.485]#paula
+    direcciones[47] = [0.69, 0.485]#santiago
+    direcciones[48] = [0.81, 0.485]#salome
+    direcciones[49] = [0.92, 0.485]#natalia
 
-    direcciones[50] = [0.59, 0.415]
-    direcciones[51] = [0.7, 0.415]
-    direcciones[52] = [0.81, 0.415]
-    direcciones[61] = [0.92, 0.415]
+    direcciones[50] = [0.59, 0.415]#nicolas
+    direcciones[51] = [0.7, 0.415]#sofia
+    direcciones[52] = [0.81, 0.415]#lorena
+    direcciones[61] = [0.92, 0.415]#miguel
 
-    direcciones[54] = [0.62, 0.345]
-    direcciones[55] = [0.72, 0.345]
-    direcciones[56] = [0.82, 0.345]
-    direcciones[53] = [0.9, 0.345]
+    direcciones[54] = [0.62, 0.345]#andres
+    direcciones[55] = [0.72, 0.345]#carlos
+    direcciones[56] = [0.82, 0.345]#david
+    direcciones[53] = [0.9, 0.345]#ana
 
-    direcciones[57] = [0.68, 0.275]
-    direcciones[58] = [0.8, 0.275]
+    direcciones[57] = [0.68, 0.275]#julieta
+    direcciones[58] = [0.8, 0.275]#katherine
 
-    direcciones[33] = [0.75, 0.22]
+    direcciones[33] = [0.75, 0.22]#alejandra
 
     for q in range(31,33):
         ab = AnnotationBbox(circulo, direcciones[int(q)], frameon=False)
